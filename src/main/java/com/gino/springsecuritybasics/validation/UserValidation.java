@@ -8,16 +8,16 @@ import org.springframework.stereotype.Component;
 public class UserValidation {
     public void validate(CreateUserDto userDto) {
         if (userDto.getFirstName() == null) {
-            throw new IllegalArgumentException(ErrorsEnum.MISSING_FIRST_NAME.getMessage());
+            throw new IllegalArgumentException(ErrorsEnum.MISSING_FIRST_NAME.getCode());
         }
         if (userDto.getLastName() == null) {
-            throw new IllegalArgumentException(ErrorsEnum.MISSING_LAST_NAME.getMessage());
+            throw new IllegalArgumentException(ErrorsEnum.MISSING_LAST_NAME.getCode());
         }
         if (!userDto.getEmail().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
-            throw new IllegalArgumentException(ErrorsEnum.INVALID_EMAIL.getMessage());
+            throw new IllegalArgumentException(ErrorsEnum.INVALID_EMAIL.getCode());
         }
         if (!userDto.getPassword().matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,16}$")) {
-            throw  new IllegalArgumentException(ErrorsEnum.INVALID_PASSWORD.getMessage());
+            throw  new IllegalArgumentException(ErrorsEnum.INVALID_PASSWORD.getCode());
         }
     }
 }
