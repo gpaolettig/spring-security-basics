@@ -1,6 +1,6 @@
 package com.gino.springsecuritybasics.service.impl;
 
-import com.gino.springsecuritybasics.service.IJWTUtilityService;
+import com.gino.springsecuritybasics.service.IJWTService;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
@@ -31,7 +31,7 @@ import java.util.Base64;
 import java.util.Date;
 
 @Service
-public class JWTUtilityServiceImpl implements IJWTUtilityService {
+public class JWTServiceImpl implements IJWTService {
     @Value("classpath:jwtKeys/private_key.pem")
     private Resource privateKeyResource;
     @Value("classpath:jwtKeys/public_key.pem")
@@ -63,7 +63,6 @@ public class JWTUtilityServiceImpl implements IJWTUtilityService {
             throw new JOSEException("Expired token");
         }
         return claimsSet;
-
     }
     private PrivateKey loadPrivateKey(Resource resource) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
         byte[] keyBytes = Files.readAllBytes(Paths.get(resource.getURI()));
