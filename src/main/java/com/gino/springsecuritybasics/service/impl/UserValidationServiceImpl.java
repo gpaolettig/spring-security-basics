@@ -22,7 +22,7 @@ public class UserValidationServiceImpl implements IUserValidationService {
     private final PasswordEncoder encoder;
 
     @Override
-    public void validateRegisterFields(CreateUserDto userDto) {
+    public void validateRegisterFields(CreateUserDto userDto) throws ApiException {
         if (userDto.getFirstName() == null) {
             throw new ApiException(ErrorsEnum.MISSING_FIRST_NAME.getMessage(), HttpStatus.BAD_REQUEST);
         }
@@ -40,14 +40,14 @@ public class UserValidationServiceImpl implements IUserValidationService {
             throw new ApiException(ErrorsEnum.EXISTING_EMAIL.getMessage(), HttpStatus.CONFLICT);
         }
     }
-    public User validateLoginFields(LoginDto loginDto) {
+    public User validateLoginFields(LoginDto loginDto) throws ApiException {
         Optional<User> userOptional = userService.findUserByEmail(loginDto.getEmail());
         if (userOptional.isEmpty()){
-            throw new ApiException(ErrorsEnum.USER_NOT_REGISTERED.getMessage(), HttpStatus.NOT_FOUND);
+            throw new ApiException(ErrorsEnum.USER_NOT_REGISTERED.getMessage(), HttpStatus.UNAUTHORIZED);
         }
         //the matches method compares an unencrypted password with an encrypted password
         if (!encoder.matches(loginDto.getPassword(), userOptional.get().getPassword())) {
-            throw new ApiException(ErrorsEnum.INCORRECT_PASSWORD.getMessage(), HttpStatus.NOT_FOUND);
+            throw new ApiException(ErrorsEnum.INCORRECT_PASSWORD.getMessage(), HttpStatus.UNAUTHORIZED);
         }
         return userOptional.get();
     }
