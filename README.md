@@ -1,4 +1,4 @@
-# User Registration and Authentication AP
+# User Registration and Authentication API
 [![Java](https://img.shields.io/badge/Java-17-blue?logo=java&logoColor=white)](https://www.java.com/) 
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.5-brightgreen?logo=spring&logoColor=white)](https://spring.io/projects/spring-boot)
 [![Spring Security](https://img.shields.io/badge/Spring%20Security-5.8.0-brightgreen?logo=spring&logoColor=white)](https://spring.io/projects/spring-security)
